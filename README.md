@@ -95,7 +95,7 @@ Base URL: `/api/v1`
 
 ## Exemplos de uso
 
-### Criar usuário
+### 1. Criar usuário (rota pública)
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/users \
@@ -109,30 +109,53 @@ curl -X POST http://localhost:8080/api/v1/users \
   }'
 ```
 
-### Criar post
+### 2. Login — obter o token
+
+```bash
+curl -X POST http://localhost:8080/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "joao@example.com", "password": "secret123"}'
+```
+
+Resposta:
+```json
+{ "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." }
+```
+
+Salve o token numa variável para facilitar os próximos comandos:
+
+```bash
+TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+```
+
+### 3. Criar post
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/posts \
+  -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"user_id": 1, "text": "Meu primeiro post!"}'
 ```
 
-### Criar comentário
+### 4. Criar comentário
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/comments \
+  -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"user_id": 1, "post_id": 1, "message": "Ótimo post!"}'
 ```
 
-### Arquivar post
+### 5. Arquivar post
 
 ```bash
-curl -X PATCH http://localhost:8080/api/v1/posts/1/archive
+curl -X PATCH http://localhost:8080/api/v1/posts/1/archive \
+  -H "Authorization: Bearer $TOKEN"
 ```
 
-### Listar posts públicos de um usuário
+### 6. Listar posts públicos de um usuário
 
 ```bash
-curl http://localhost:8080/api/v1/users/1/posts
+curl http://localhost:8080/api/v1/users/1/posts \
+  -H "Authorization: Bearer $TOKEN"
 ```
