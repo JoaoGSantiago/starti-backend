@@ -1,0 +1,20 @@
+.env
+
+starti-api
+
+# dados do postgres quando rodado localmente sem Docker
+*.db
+
+# diretório de cache do Go
+vendor/
+
+# IDEs
+.idea/
+.vscode/
+
+# logs
+*.log
+
+# cobertura de testes
+coverage.out
+coverage.html
