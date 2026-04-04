@@ -42,7 +42,13 @@ func (s *postService) Create(input CreatePostInput) (*models.Post, error) {
 	if err := s.repo.Create(post); err != nil {
 		return nil, err
 	}
-	return post, nil
+
+	createdPost, err := s.repo.FindByID(post.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	return createdPost, nil
 }
 
 func (s *postService) GetByID(id uint) (*models.Post, error) {
