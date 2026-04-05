@@ -3,7 +3,7 @@ package services
 import (
 	"errors"
 
-	"github.com/JoaoGSantiago/starti-backend/internal/model"
+	models "github.com/JoaoGSantiago/starti-backend/internal/model"
 	"github.com/JoaoGSantiago/starti-backend/internal/repositories"
 	"gorm.io/gorm"
 )

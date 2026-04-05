@@ -109,7 +109,7 @@ curl -X POST http://localhost:8080/api/v1/users \
   }'
 ```
 
-### 2. Login — obter o token
+### 2. Login (rota pública) - obter token
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/auth/login \
@@ -128,7 +128,51 @@ Salve o token numa variável para facilitar os próximos comandos:
 TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 
-### 3. Criar post
+### 3. Listar usuários
+
+```bash
+curl http://localhost:8080/api/v1/users \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### 4. Buscar usuário por ID
+
+```bash
+curl http://localhost:8080/api/v1/users/1 \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### 5. Atualizar usuário
+
+```bash
+curl -X PUT http://localhost:8080/api/v1/users/1 \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "João Silva Atualizado", "biography": "Dev Go e APIs REST"}'
+```
+
+### 6. Deletar usuário
+
+```bash
+curl -X DELETE http://localhost:8080/api/v1/users/1 \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### 7. Listar posts publicos de um usuário
+
+```bash
+curl http://localhost:8080/api/v1/users/1/posts \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### 8. Listar comentários de um usuário em posts publicos
+
+```bash
+curl http://localhost:8080/api/v1/users/1/comments \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### 9. Criar post
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/posts \
@@ -137,7 +181,44 @@ curl -X POST http://localhost:8080/api/v1/posts \
   -d '{"user_id": 1, "text": "Meu primeiro post!"}'
 ```
 
-### 4. Criar comentário
+### 10. Buscar post por ID
+
+```bash
+curl http://localhost:8080/api/v1/posts/1 \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### 11. Atualizar post
+
+```bash
+curl -X PUT http://localhost:8080/api/v1/posts/1 \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Texto atualizado do post"}'
+```
+
+### 12. Deletar post
+
+```bash
+curl -X DELETE http://localhost:8080/api/v1/posts/1 \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### 13. Arquivar post
+
+```bash
+curl -X PATCH http://localhost:8080/api/v1/posts/1/archive \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### 14. Listar comentários de um post
+
+```bash
+curl http://localhost:8080/api/v1/posts/1/comments \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### 15. Criar comentário
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/comments \
@@ -146,16 +227,18 @@ curl -X POST http://localhost:8080/api/v1/comments \
   -d '{"user_id": 1, "post_id": 1, "message": "Ótimo post!"}'
 ```
 
-### 5. Arquivar post
+### 16. Atualizar comentário
 
 ```bash
-curl -X PATCH http://localhost:8080/api/v1/posts/1/archive \
-  -H "Authorization: Bearer $TOKEN"
+curl -X PUT http://localhost:8080/api/v1/comments/1 \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Comentario atualizado"}'
 ```
 
-### 6. Listar posts públicos de um usuário
+### 17. Deletar comentário
 
 ```bash
-curl http://localhost:8080/api/v1/users/1/posts \
+curl -X DELETE http://localhost:8080/api/v1/comments/1 \
   -H "Authorization: Bearer $TOKEN"
 ```

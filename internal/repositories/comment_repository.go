@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"github.com/JoaoGSantiago/starti-backend/internal/model"
+	models "github.com/JoaoGSantiago/starti-backend/internal/model"
 	"gorm.io/gorm"
 )
 
