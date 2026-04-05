@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	_ "github.com/JoaoGSantiago/starti-backend/docs"
 	"github.com/JoaoGSantiago/starti-backend/internal/config"
 	"github.com/JoaoGSantiago/starti-backend/internal/db"
 	"github.com/JoaoGSantiago/starti-backend/internal/handlers"
@@ -10,6 +11,8 @@ import (
 	"github.com/JoaoGSantiago/starti-backend/internal/router"
 	"github.com/JoaoGSantiago/starti-backend/internal/services"
 	"github.com/joho/godotenv"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func main() {
@@ -39,6 +42,7 @@ func main() {
 	commentHandler := handlers.NewCommentHandler(commentSvc)
 
 	r := router.Setup(jwtSvc, authHandler, userHandler, postHandler, commentHandler)
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	log.Printf("server deu run em :%s", cfg.ServerPort)
 	if err := r.Run(":" + cfg.ServerPort); err != nil {

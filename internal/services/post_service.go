@@ -9,12 +9,12 @@ import (
 )
 
 type CreatePostInput struct {
-	UserID uint   `json:"user_id" binding:"required"`
-	Text   string `json:"text" binding:"required,min=1"`
+	UserID uint   `json:"user_id" binding:"required" example:"1"`
+	Text   string `json:"text" binding:"required,min=1" example:"Meu primeiro post no Starti!"`
 }
 
 type UpdatePostInput struct {
-	Text string `json:"text" binding:"required,min=1"`
+	Text string `json:"text" binding:"required,min=1" example:"Texto atualizado do post"`
 }
 
 type PostService interface {

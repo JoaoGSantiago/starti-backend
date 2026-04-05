@@ -3,23 +3,23 @@ package services
 import (
 	"errors"
 
-	"github.com/JoaoGSantiago/starti-backend/internal/model"
+	models "github.com/JoaoGSantiago/starti-backend/internal/model"
 	"github.com/JoaoGSantiago/starti-backend/internal/repositories"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
 type CreateUserInput struct {
-	Username  string `json:"username" binding:"required,min=3,max=50"`
-	Name      string `json:"name" binding:"required,min=2,max=100"`
-	Email     string `json:"email" binding:"required,email"`
-	Password  string `json:"password" binding:"required,min=6"`
-	Biography string `json:"biography"`
+	Username  string `json:"username" binding:"required,min=3,max=50" example:"joaogs"`
+	Name      string `json:"name" binding:"required,min=2,max=100" example:"Joao Santiago"`
+	Email     string `json:"email" binding:"required,email" example:"joao@joao.com"`
+	Password  string `json:"password" binding:"required,min=6" example:"senha123"`
+	Biography string `json:"biography" example:"Desenvolvedor Go e APIs REST"`
 }
 
 type UpdateUserInput struct {
-	Name      string `json:"name" binding:"omitempty,min=2,max=100"`
-	Biography string `json:"biography"`
+	Name      string `json:"name" binding:"omitempty,min=2,max=100" example:"Joao Santiago Junior"`
+	Biography string `json:"biography" example:"Backend engineer focado em Go"`
 }
 
 type UserService interface {

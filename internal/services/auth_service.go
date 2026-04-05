@@ -8,8 +8,8 @@ import (
 )
 
 type LoginInput struct {
-	Email    string `json:"email" binding:"required,email"`
-	Password string `json:"password" binding:"required"`
+	Email    string `json:"email" binding:"required,email" example:"joao@joao.com"`
+	Password string `json:"password" binding:"required" example:"senha123"`
 }
 
 type AuthService interface {

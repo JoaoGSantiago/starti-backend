@@ -12,13 +12,22 @@ const UserIDKey = "userID"
 
 func Auth(jwtService services.JWTService) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		header := c.GetHeader("Authorization")
-		if header == "" || !strings.HasPrefix(header, "Bearer ") {
+		header := strings.TrimSpace(c.GetHeader("Authorization"))
+		if header == "" {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"erro": "autorizaçao invalida"})
 			return
 		}
 
-		tokenStr := strings.TrimPrefix(header, "Bearer ")
+		tokenStr := header
+		if strings.HasPrefix(strings.ToLower(header), "bearer ") {
+			tokenStr = strings.TrimSpace(header[len("Bearer "):])
+		}
+
+		if tokenStr == "" {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"erro": "autorizaçao invalida"})
+			return
+		}
+
 		claims, err := jwtService.Validate(tokenStr)
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"erro": "token expirado ou invalido"})

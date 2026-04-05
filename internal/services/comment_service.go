@@ -9,13 +9,13 @@ import (
 )
 
 type CreateCommentInput struct {
-	UserID  uint   `json:"user_id" binding:"required"`
-	PostID  uint   `json:"post_id" binding:"required"`
-	Message string `json:"message" binding:"required,min=1"`
+	UserID  uint   `json:"user_id" binding:"required" example:"1"`
+	PostID  uint   `json:"post_id" binding:"required" example:"1"`
+	Message string `json:"message" binding:"required,min=1" example:"Otimo post, curti bastante!"`
 }
 
 type UpdateCommentInput struct {
-	Message string `json:"message" binding:"required,min=1"`
+	Message string `json:"message" binding:"required,min=1" example:"Comentario atualizado"`
 }
 
 type CommentService interface {

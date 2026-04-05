@@ -54,6 +54,14 @@ docker compose up --build
 
 A API ficará disponível em `http://localhost:8080`.
 
+### Documentação Swagger
+
+Com a API rodando, acesse:
+
+```text
+http://localhost:8080/swagger/index.html
+```
+
 ---
 
 ## Endpoints
