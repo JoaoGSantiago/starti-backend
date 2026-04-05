@@ -41,7 +41,13 @@ func (s *commentService) Create(input CreateCommentInput) (*models.Comment, erro
 	if err := s.repo.Create(comment); err != nil {
 		return nil, err
 	}
-	return comment, nil
+
+	createdComment, err := s.repo.FindByID(comment.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	return createdComment, nil
 }
 
 func (s *commentService) Update(id uint, input UpdateCommentInput) (*models.Comment, error) {

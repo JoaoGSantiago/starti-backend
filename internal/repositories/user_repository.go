@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"github.com/JoaoGSantiago/starti-backend/internal/model"
+	models "github.com/JoaoGSantiago/starti-backend/internal/model"
 	"gorm.io/gorm"
 )
 
@@ -71,7 +71,7 @@ func (r *userRepository) Delete(id uint) error {
 
 func (r *userRepository) ListPublicPosts(userID uint) ([]models.Post, error) {
 	var posts []models.Post
-	if err := r.db.Where("user_id = ? AND archived = false", userID).Find(&posts).Error; err != nil {
+	if err := r.db.Where("user_id = ? AND archived = false", userID).Preload("User").Find(&posts).Error; err != nil {
 		return nil, err
 	}
 	return posts, nil
@@ -84,7 +84,9 @@ func (r *userRepository) ListPublicComments(userID uint) ([]models.Comment, erro
 	err := r.db.
 		Joins("JOIN posts ON posts.id = comments.post_id").
 		Where("comments.user_id = ? AND posts.archived = false", userID).
+		Preload("User").
 		Preload("Post").
+		Preload("Post.User").
 		Find(&comments).Error
 	if err != nil {
 		return nil, err

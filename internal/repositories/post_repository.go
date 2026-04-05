@@ -48,7 +48,7 @@ func (r *postRepository) Archive(id uint) error {
 
 func (r *postRepository) ListComments(postID uint) ([]models.Comment, error) {
 	var comments []models.Comment
-	if err := r.db.Where("post_id = ?", postID).Preload("User").Find(&comments).Error; err != nil {
+	if err := r.db.Where("post_id = ?", postID).Preload("User").Preload("Post").Preload("Post.User").Find(&comments).Error; err != nil {
 		return nil, err
 	}
 	return comments, nil
