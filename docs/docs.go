@@ -35,7 +35,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.LoginInput"
+                            "$ref": "#/definitions/services.LoginInput"
                         }
                     }
                 ],
@@ -43,19 +43,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.LoginResponse"
+                            "$ref": "#/definitions/handlers.LoginResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -86,7 +86,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.CreateCommentInput"
+                            "$ref": "#/definitions/services.CreateCommentInput"
                         }
                     }
                 ],
@@ -94,19 +94,19 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.CommentResponse"
+                            "$ref": "#/definitions/handlers.CommentResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -144,7 +144,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.UpdateCommentInput"
+                            "$ref": "#/definitions/services.UpdateCommentInput"
                         }
                     }
                 ],
@@ -152,25 +152,25 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.CommentResponse"
+                            "$ref": "#/definitions/handlers.CommentResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -202,25 +202,57 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
             }
         },
         "/posts": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retorna todas as publicacoes com os dados do usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Lista todos os posts",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/handlers.PostResponse"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ErrorResponse"
+                        }
+                    }
+                }
+            },
             "post": {
                 "security": [
                     {
@@ -245,7 +277,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.CreatePostInput"
+                            "$ref": "#/definitions/services.CreatePostInput"
                         }
                     }
                 ],
@@ -253,19 +285,19 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.PostResponse"
+                            "$ref": "#/definitions/handlers.PostResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -299,19 +331,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.PostResponse"
+                            "$ref": "#/definitions/handlers.PostResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -347,7 +379,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.UpdatePostInput"
+                            "$ref": "#/definitions/services.UpdatePostInput"
                         }
                     }
                 ],
@@ -355,25 +387,25 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.PostResponse"
+                            "$ref": "#/definitions/handlers.PostResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -405,19 +437,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -451,25 +483,25 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.MessageResponse"
+                            "$ref": "#/definitions/handlers.MessageResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -505,26 +537,26 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/internal_handlers.CommentResponse"
+                                "$ref": "#/definitions/handlers.CommentResponse"
                             }
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -551,14 +583,14 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/internal_handlers.UserSummary"
+                                "$ref": "#/definitions/handlers.UserSummary"
                             }
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -582,7 +614,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.CreateUserInput"
+                            "$ref": "#/definitions/services.CreateUserInput"
                         }
                     }
                 ],
@@ -590,25 +622,25 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.UserSummary"
+                            "$ref": "#/definitions/handlers.UserSummary"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "409": {
                         "description": "Conflict",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -642,19 +674,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.UserSummary"
+                            "$ref": "#/definitions/handlers.UserSummary"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -690,7 +722,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.UpdateUserInput"
+                            "$ref": "#/definitions/services.UpdateUserInput"
                         }
                     }
                 ],
@@ -698,25 +730,25 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.UserSummary"
+                            "$ref": "#/definitions/handlers.UserSummary"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -748,19 +780,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -796,26 +828,26 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/internal_handlers.CommentResponse"
+                                "$ref": "#/definitions/handlers.CommentResponse"
                             }
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -851,26 +883,26 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/internal_handlers.PostResponse"
+                                "$ref": "#/definitions/handlers.PostResponse"
                             }
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/internal_handlers.ErrorResponse"
+                            "$ref": "#/definitions/handlers.ErrorResponse"
                         }
                     }
                 }
@@ -878,7 +910,163 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "github_com_JoaoGSantiago_starti-backend_internal_services.CreateCommentInput": {
+        "handlers.CommentResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string",
+                    "example": "2026-04-04T21:22:16-03:00"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Otimo post, curti bastante!"
+                },
+                "post": {
+                    "$ref": "#/definitions/handlers.PostSummary"
+                },
+                "post_id": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "updated_at": {
+                    "type": "string",
+                    "example": "2026-04-04T21:22:16-03:00"
+                },
+                "user": {
+                    "$ref": "#/definitions/handlers.UserSummary"
+                },
+                "user_id": {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "handlers.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "usuario nao encontrado"
+                }
+            }
+        },
+        "handlers.LoginResponse": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                }
+            }
+        },
+        "handlers.MessageResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "post archived"
+                }
+            }
+        },
+        "handlers.PostResponse": {
+            "type": "object",
+            "properties": {
+                "archived": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "created_at": {
+                    "type": "string",
+                    "example": "2026-04-04T21:10:41-03:00"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "text": {
+                    "type": "string",
+                    "example": "Meu primeiro post no Starti!"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "example": "2026-04-04T21:10:41-03:00"
+                },
+                "user": {
+                    "$ref": "#/definitions/handlers.UserSummary"
+                },
+                "user_id": {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "handlers.PostSummary": {
+            "type": "object",
+            "properties": {
+                "archived": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "created_at": {
+                    "type": "string",
+                    "example": "2026-04-04T21:10:41-03:00"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "text": {
+                    "type": "string",
+                    "example": "Meu primeiro post no Starti!"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "example": "2026-04-04T21:10:41-03:00"
+                },
+                "user_id": {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "handlers.UserSummary": {
+            "type": "object",
+            "properties": {
+                "biography": {
+                    "type": "string",
+                    "example": "Desenvolvedor Go e APIs REST"
+                },
+                "created_at": {
+                    "type": "string",
+                    "example": "2026-04-04T21:10:41-03:00"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "joao@joao.com"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Joao Santiago"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "example": "2026-04-04T21:10:41-03:00"
+                },
+                "username": {
+                    "type": "string",
+                    "example": "joaogs"
+                }
+            }
+        },
+        "services.CreateCommentInput": {
             "type": "object",
             "required": [
                 "message",
@@ -901,7 +1089,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_JoaoGSantiago_starti-backend_internal_services.CreatePostInput": {
+        "services.CreatePostInput": {
             "type": "object",
             "required": [
                 "text",
@@ -919,7 +1107,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_JoaoGSantiago_starti-backend_internal_services.CreateUserInput": {
+        "services.CreateUserInput": {
             "type": "object",
             "required": [
                 "email",
@@ -955,7 +1143,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_JoaoGSantiago_starti-backend_internal_services.LoginInput": {
+        "services.LoginInput": {
             "type": "object",
             "required": [
                 "email",
@@ -972,7 +1160,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_JoaoGSantiago_starti-backend_internal_services.UpdateCommentInput": {
+        "services.UpdateCommentInput": {
             "type": "object",
             "required": [
                 "message"
@@ -985,7 +1173,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_JoaoGSantiago_starti-backend_internal_services.UpdatePostInput": {
+        "services.UpdatePostInput": {
             "type": "object",
             "required": [
                 "text"
@@ -998,7 +1186,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_JoaoGSantiago_starti-backend_internal_services.UpdateUserInput": {
+        "services.UpdateUserInput": {
             "type": "object",
             "properties": {
                 "biography": {
@@ -1012,167 +1200,11 @@ const docTemplate = `{
                     "example": "Joao Santiago Junior"
                 }
             }
-        },
-        "internal_handlers.CommentResponse": {
-            "type": "object",
-            "properties": {
-                "created_at": {
-                    "type": "string",
-                    "example": "2026-04-04T21:22:16-03:00"
-                },
-                "id": {
-                    "type": "integer",
-                    "example": 3
-                },
-                "message": {
-                    "type": "string",
-                    "example": "Otimo post, curti bastante!"
-                },
-                "post": {
-                    "$ref": "#/definitions/internal_handlers.PostSummary"
-                },
-                "post_id": {
-                    "type": "integer",
-                    "example": 10
-                },
-                "updated_at": {
-                    "type": "string",
-                    "example": "2026-04-04T21:22:16-03:00"
-                },
-                "user": {
-                    "$ref": "#/definitions/internal_handlers.UserSummary"
-                },
-                "user_id": {
-                    "type": "integer",
-                    "example": 1
-                }
-            }
-        },
-        "internal_handlers.ErrorResponse": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "type": "string",
-                    "example": "usuario nao encontrado"
-                }
-            }
-        },
-        "internal_handlers.LoginResponse": {
-            "type": "object",
-            "properties": {
-                "token": {
-                    "type": "string",
-                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-                }
-            }
-        },
-        "internal_handlers.MessageResponse": {
-            "type": "object",
-            "properties": {
-                "message": {
-                    "type": "string",
-                    "example": "post archived"
-                }
-            }
-        },
-        "internal_handlers.PostResponse": {
-            "type": "object",
-            "properties": {
-                "archived": {
-                    "type": "boolean",
-                    "example": false
-                },
-                "created_at": {
-                    "type": "string",
-                    "example": "2026-04-04T21:10:41-03:00"
-                },
-                "id": {
-                    "type": "integer",
-                    "example": 10
-                },
-                "text": {
-                    "type": "string",
-                    "example": "Meu primeiro post no Starti!"
-                },
-                "updated_at": {
-                    "type": "string",
-                    "example": "2026-04-04T21:10:41-03:00"
-                },
-                "user": {
-                    "$ref": "#/definitions/internal_handlers.UserSummary"
-                },
-                "user_id": {
-                    "type": "integer",
-                    "example": 1
-                }
-            }
-        },
-        "internal_handlers.PostSummary": {
-            "type": "object",
-            "properties": {
-                "archived": {
-                    "type": "boolean",
-                    "example": false
-                },
-                "created_at": {
-                    "type": "string",
-                    "example": "2026-04-04T21:10:41-03:00"
-                },
-                "id": {
-                    "type": "integer",
-                    "example": 10
-                },
-                "text": {
-                    "type": "string",
-                    "example": "Meu primeiro post no Starti!"
-                },
-                "updated_at": {
-                    "type": "string",
-                    "example": "2026-04-04T21:10:41-03:00"
-                },
-                "user_id": {
-                    "type": "integer",
-                    "example": 1
-                }
-            }
-        },
-        "internal_handlers.UserSummary": {
-            "type": "object",
-            "properties": {
-                "biography": {
-                    "type": "string",
-                    "example": "Desenvolvedor Go e APIs REST"
-                },
-                "created_at": {
-                    "type": "string",
-                    "example": "2026-04-04T21:10:41-03:00"
-                },
-                "email": {
-                    "type": "string",
-                    "example": "joao@joao.com"
-                },
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "Joao Santiago"
-                },
-                "updated_at": {
-                    "type": "string",
-                    "example": "2026-04-04T21:10:41-03:00"
-                },
-                "username": {
-                    "type": "string",
-                    "example": "joaogs"
-                }
-            }
         }
     },
     "securityDefinitions": {
         "BearerAuth": {
-            "description": "Use o formato: Bearer {token}",
+            "description": "Aceita \"Bearer {token}\" ou apenas o token.",
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"

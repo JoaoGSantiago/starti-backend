@@ -1,6 +1,117 @@
 basePath: /api/v1
 definitions:
-  github_com_JoaoGSantiago_starti-backend_internal_services.CreateCommentInput:
+  handlers.CommentResponse:
+    properties:
+      created_at:
+        example: "2026-04-04T21:22:16-03:00"
+        type: string
+      id:
+        example: 3
+        type: integer
+      message:
+        example: Otimo post, curti bastante!
+        type: string
+      post:
+        $ref: '#/definitions/handlers.PostSummary'
+      post_id:
+        example: 10
+        type: integer
+      updated_at:
+        example: "2026-04-04T21:22:16-03:00"
+        type: string
+      user:
+        $ref: '#/definitions/handlers.UserSummary'
+      user_id:
+        example: 1
+        type: integer
+    type: object
+  handlers.ErrorResponse:
+    properties:
+      error:
+        example: usuario nao encontrado
+        type: string
+    type: object
+  handlers.LoginResponse:
+    properties:
+      token:
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        type: string
+    type: object
+  handlers.MessageResponse:
+    properties:
+      message:
+        example: post archived
+        type: string
+    type: object
+  handlers.PostResponse:
+    properties:
+      archived:
+        example: false
+        type: boolean
+      created_at:
+        example: "2026-04-04T21:10:41-03:00"
+        type: string
+      id:
+        example: 10
+        type: integer
+      text:
+        example: Meu primeiro post no Starti!
+        type: string
+      updated_at:
+        example: "2026-04-04T21:10:41-03:00"
+        type: string
+      user:
+        $ref: '#/definitions/handlers.UserSummary'
+      user_id:
+        example: 1
+        type: integer
+    type: object
+  handlers.PostSummary:
+    properties:
+      archived:
+        example: false
+        type: boolean
+      created_at:
+        example: "2026-04-04T21:10:41-03:00"
+        type: string
+      id:
+        example: 10
+        type: integer
+      text:
+        example: Meu primeiro post no Starti!
+        type: string
+      updated_at:
+        example: "2026-04-04T21:10:41-03:00"
+        type: string
+      user_id:
+        example: 1
+        type: integer
+    type: object
+  handlers.UserSummary:
+    properties:
+      biography:
+        example: Desenvolvedor Go e APIs REST
+        type: string
+      created_at:
+        example: "2026-04-04T21:10:41-03:00"
+        type: string
+      email:
+        example: joao@joao.com
+        type: string
+      id:
+        example: 1
+        type: integer
+      name:
+        example: Joao Santiago
+        type: string
+      updated_at:
+        example: "2026-04-04T21:10:41-03:00"
+        type: string
+      username:
+        example: joaogs
+        type: string
+    type: object
+  services.CreateCommentInput:
     properties:
       message:
         example: Otimo post, curti bastante!
@@ -17,7 +128,7 @@ definitions:
     - post_id
     - user_id
     type: object
-  github_com_JoaoGSantiago_starti-backend_internal_services.CreatePostInput:
+  services.CreatePostInput:
     properties:
       text:
         example: Meu primeiro post no Starti!
@@ -30,7 +141,7 @@ definitions:
     - text
     - user_id
     type: object
-  github_com_JoaoGSantiago_starti-backend_internal_services.CreateUserInput:
+  services.CreateUserInput:
     properties:
       biography:
         example: Desenvolvedor Go e APIs REST
@@ -58,7 +169,7 @@ definitions:
     - password
     - username
     type: object
-  github_com_JoaoGSantiago_starti-backend_internal_services.LoginInput:
+  services.LoginInput:
     properties:
       email:
         example: joao@joao.com
@@ -70,7 +181,7 @@ definitions:
     - email
     - password
     type: object
-  github_com_JoaoGSantiago_starti-backend_internal_services.UpdateCommentInput:
+  services.UpdateCommentInput:
     properties:
       message:
         example: Comentario atualizado
@@ -79,7 +190,7 @@ definitions:
     required:
     - message
     type: object
-  github_com_JoaoGSantiago_starti-backend_internal_services.UpdatePostInput:
+  services.UpdatePostInput:
     properties:
       text:
         example: Texto atualizado do post
@@ -88,7 +199,7 @@ definitions:
     required:
     - text
     type: object
-  github_com_JoaoGSantiago_starti-backend_internal_services.UpdateUserInput:
+  services.UpdateUserInput:
     properties:
       biography:
         example: Backend engineer focado em Go
@@ -97,117 +208,6 @@ definitions:
         example: Joao Santiago Junior
         maxLength: 100
         minLength: 2
-        type: string
-    type: object
-  internal_handlers.CommentResponse:
-    properties:
-      created_at:
-        example: "2026-04-04T21:22:16-03:00"
-        type: string
-      id:
-        example: 3
-        type: integer
-      message:
-        example: Otimo post, curti bastante!
-        type: string
-      post:
-        $ref: '#/definitions/internal_handlers.PostSummary'
-      post_id:
-        example: 10
-        type: integer
-      updated_at:
-        example: "2026-04-04T21:22:16-03:00"
-        type: string
-      user:
-        $ref: '#/definitions/internal_handlers.UserSummary'
-      user_id:
-        example: 1
-        type: integer
-    type: object
-  internal_handlers.ErrorResponse:
-    properties:
-      error:
-        example: usuario nao encontrado
-        type: string
-    type: object
-  internal_handlers.LoginResponse:
-    properties:
-      token:
-        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-        type: string
-    type: object
-  internal_handlers.MessageResponse:
-    properties:
-      message:
-        example: post archived
-        type: string
-    type: object
-  internal_handlers.PostResponse:
-    properties:
-      archived:
-        example: false
-        type: boolean
-      created_at:
-        example: "2026-04-04T21:10:41-03:00"
-        type: string
-      id:
-        example: 10
-        type: integer
-      text:
-        example: Meu primeiro post no Starti!
-        type: string
-      updated_at:
-        example: "2026-04-04T21:10:41-03:00"
-        type: string
-      user:
-        $ref: '#/definitions/internal_handlers.UserSummary'
-      user_id:
-        example: 1
-        type: integer
-    type: object
-  internal_handlers.PostSummary:
-    properties:
-      archived:
-        example: false
-        type: boolean
-      created_at:
-        example: "2026-04-04T21:10:41-03:00"
-        type: string
-      id:
-        example: 10
-        type: integer
-      text:
-        example: Meu primeiro post no Starti!
-        type: string
-      updated_at:
-        example: "2026-04-04T21:10:41-03:00"
-        type: string
-      user_id:
-        example: 1
-        type: integer
-    type: object
-  internal_handlers.UserSummary:
-    properties:
-      biography:
-        example: Desenvolvedor Go e APIs REST
-        type: string
-      created_at:
-        example: "2026-04-04T21:10:41-03:00"
-        type: string
-      email:
-        example: joao@joao.com
-        type: string
-      id:
-        example: 1
-        type: integer
-      name:
-        example: Joao Santiago
-        type: string
-      updated_at:
-        example: "2026-04-04T21:10:41-03:00"
-        type: string
-      username:
-        example: joaogs
         type: string
     type: object
 info:
@@ -227,22 +227,22 @@ paths:
         name: payload
         required: true
         schema:
-          $ref: '#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.LoginInput'
+          $ref: '#/definitions/services.LoginInput'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/internal_handlers.LoginResponse'
+            $ref: '#/definitions/handlers.LoginResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       summary: Realiza login
       tags:
       - Auth
@@ -257,22 +257,22 @@ paths:
         name: payload
         required: true
         schema:
-          $ref: '#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.CreateCommentInput'
+          $ref: '#/definitions/services.CreateCommentInput'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/internal_handlers.CommentResponse'
+            $ref: '#/definitions/handlers.CommentResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Cria comentario
@@ -293,15 +293,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Remove comentario
@@ -322,32 +322,52 @@ paths:
         name: payload
         required: true
         schema:
-          $ref: '#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.UpdateCommentInput'
+          $ref: '#/definitions/services.UpdateCommentInput'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/internal_handlers.CommentResponse'
+            $ref: '#/definitions/handlers.CommentResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Atualiza comentario
       tags:
       - Comments
   /posts:
+    get:
+      description: Retorna todas as publicacoes com os dados do usuario
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.PostResponse'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handlers.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Lista todos os posts
+      tags:
+      - Posts
     post:
       consumes:
       - application/json
@@ -358,22 +378,22 @@ paths:
         name: payload
         required: true
         schema:
-          $ref: '#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.CreatePostInput'
+          $ref: '#/definitions/services.CreatePostInput'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/internal_handlers.PostResponse'
+            $ref: '#/definitions/handlers.PostResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Cria post
@@ -394,15 +414,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Remove post
@@ -422,15 +442,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/internal_handlers.PostResponse'
+            $ref: '#/definitions/handlers.PostResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Busca post por ID
@@ -451,26 +471,26 @@ paths:
         name: payload
         required: true
         schema:
-          $ref: '#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.UpdatePostInput'
+          $ref: '#/definitions/services.UpdatePostInput'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/internal_handlers.PostResponse'
+            $ref: '#/definitions/handlers.PostResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Atualiza post
@@ -491,19 +511,19 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/internal_handlers.MessageResponse'
+            $ref: '#/definitions/handlers.MessageResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Arquiva post
@@ -525,20 +545,20 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/internal_handlers.CommentResponse'
+              $ref: '#/definitions/handlers.CommentResponse'
             type: array
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Lista comentarios de um post
@@ -554,12 +574,12 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/internal_handlers.UserSummary'
+              $ref: '#/definitions/handlers.UserSummary'
             type: array
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Lista usuarios
@@ -575,26 +595,26 @@ paths:
         name: payload
         required: true
         schema:
-          $ref: '#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.CreateUserInput'
+          $ref: '#/definitions/services.CreateUserInput'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/internal_handlers.UserSummary'
+            $ref: '#/definitions/handlers.UserSummary'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "409":
           description: Conflict
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       summary: Cria usuario
       tags:
       - Users
@@ -613,15 +633,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Remove usuario
@@ -641,15 +661,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/internal_handlers.UserSummary'
+            $ref: '#/definitions/handlers.UserSummary'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Busca usuario por ID
@@ -670,26 +690,26 @@ paths:
         name: payload
         required: true
         schema:
-          $ref: '#/definitions/github_com_JoaoGSantiago_starti-backend_internal_services.UpdateUserInput'
+          $ref: '#/definitions/services.UpdateUserInput'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/internal_handlers.UserSummary'
+            $ref: '#/definitions/handlers.UserSummary'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Atualiza usuario
@@ -711,20 +731,20 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/internal_handlers.CommentResponse'
+              $ref: '#/definitions/handlers.CommentResponse'
             type: array
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Lista comentarios publicos do usuario
@@ -746,20 +766,20 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/internal_handlers.PostResponse'
+              $ref: '#/definitions/handlers.PostResponse'
             type: array
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/internal_handlers.ErrorResponse'
+            $ref: '#/definitions/handlers.ErrorResponse'
       security:
       - BearerAuth: []
       summary: Lista posts publicos do usuario
@@ -769,7 +789,7 @@ schemes:
 - http
 securityDefinitions:
   BearerAuth:
-    description: 'Use o formato: Bearer {token}'
+    description: Aceita "Bearer {token}" ou apenas o token.
     in: header
     name: Authorization
     type: apiKey

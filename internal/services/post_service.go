@@ -19,6 +19,7 @@ type UpdatePostInput struct {
 
 type PostService interface {
 	Create(input CreatePostInput) (*models.Post, error)
+	ListAll() ([]models.Post, error)
 	GetByID(id uint) (*models.Post, error)
 	Update(id uint, input UpdatePostInput) (*models.Post, error)
 	Delete(id uint) error
@@ -49,6 +50,10 @@ func (s *postService) Create(input CreatePostInput) (*models.Post, error) {
 	}
 
 	return createdPost, nil
+}
+
+func (s *postService) ListAll() ([]models.Post, error) {
+	return s.repo.FindAll()
 }
 
 func (s *postService) GetByID(id uint) (*models.Post, error) {

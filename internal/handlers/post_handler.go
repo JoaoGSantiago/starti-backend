@@ -15,6 +15,16 @@ func NewPostHandler(service services.PostService) *PostHandler {
 	return &PostHandler{service: service}
 }
 
+func (h *PostHandler) ListPosts(c *gin.Context) {
+	posts, err := h.service.ListAll()
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	successResponse(c, http.StatusOK, posts)
+}
+
 func (h *PostHandler) CreatePost(c *gin.Context) {
 	var input services.CreatePostInput
 	if err := c.ShouldBindJSON(&input); err != nil {

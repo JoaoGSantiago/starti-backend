@@ -84,6 +84,7 @@ Base URL: `/api/v1`
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
+| GET | `/posts` | Listar todas as publicações |
 | POST | `/posts` | Criar publicação |
 | GET | `/posts/:id` | Buscar publicação por ID |
 | PUT | `/posts/:id` | Atualizar publicação |
@@ -180,7 +181,14 @@ curl http://localhost:8080/api/v1/users/1/comments \
   -H "Authorization: Bearer $TOKEN"
 ```
 
-### 9. Criar post
+### 9. Listar todos os posts
+
+```bash
+curl http://localhost:8080/api/v1/posts \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### 10. Criar post
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/posts \
@@ -189,14 +197,14 @@ curl -X POST http://localhost:8080/api/v1/posts \
   -d '{"user_id": 1, "text": "Meu primeiro post!"}'
 ```
 
-### 10. Buscar post por ID
+### 11. Buscar post por ID
 
 ```bash
 curl http://localhost:8080/api/v1/posts/1 \
   -H "Authorization: Bearer $TOKEN"
 ```
 
-### 11. Atualizar post
+### 12. Atualizar post
 
 ```bash
 curl -X PUT http://localhost:8080/api/v1/posts/1 \
@@ -205,28 +213,28 @@ curl -X PUT http://localhost:8080/api/v1/posts/1 \
   -d '{"text": "Texto atualizado do post"}'
 ```
 
-### 12. Deletar post
+### 13. Deletar post
 
 ```bash
 curl -X DELETE http://localhost:8080/api/v1/posts/1 \
   -H "Authorization: Bearer $TOKEN"
 ```
 
-### 13. Arquivar post
+### 14. Arquivar post
 
 ```bash
 curl -X PATCH http://localhost:8080/api/v1/posts/1/archive \
   -H "Authorization: Bearer $TOKEN"
 ```
 
-### 14. Listar comentários de um post
+### 15. Listar comentários de um post
 
 ```bash
 curl http://localhost:8080/api/v1/posts/1/comments \
   -H "Authorization: Bearer $TOKEN"
 ```
 
-### 15. Criar comentário
+### 16. Criar comentário
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/comments \
@@ -235,7 +243,7 @@ curl -X POST http://localhost:8080/api/v1/comments \
   -d '{"user_id": 1, "post_id": 1, "message": "Ótimo post!"}'
 ```
 
-### 16. Atualizar comentário
+### 17. Atualizar comentário
 
 ```bash
 curl -X PUT http://localhost:8080/api/v1/comments/1 \
@@ -244,7 +252,7 @@ curl -X PUT http://localhost:8080/api/v1/comments/1 \
   -d '{"message": "Comentario atualizado"}'
 ```
 
-### 17. Deletar comentário
+### 18. Deletar comentário
 
 ```bash
 curl -X DELETE http://localhost:8080/api/v1/comments/1 \

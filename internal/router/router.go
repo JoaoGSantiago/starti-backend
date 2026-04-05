@@ -35,6 +35,7 @@ func Setup(
 		users.GET("/:id/comments", userHandler.ListUserComments)
 
 		posts := protected.Group("/posts")
+		posts.GET("", postHandler.ListPosts)
 		posts.POST("", postHandler.CreatePost)
 		posts.GET("/:id", postHandler.GetPost)
 		posts.PUT("/:id", postHandler.UpdatePost)

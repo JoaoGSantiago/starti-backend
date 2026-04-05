@@ -14,7 +14,6 @@ import (
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
-
 func main() {
 	if err := godotenv.Load(); err != nil {
 		log.Println("sem .env")

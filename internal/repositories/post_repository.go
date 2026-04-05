@@ -7,6 +7,7 @@ import (
 
 type PostRepository interface {
 	Create(post *models.Post) error
+	FindAll() ([]models.Post, error)
 	FindByID(id uint) (*models.Post, error)
 	Update(post *models.Post) error
 	Delete(id uint) error
@@ -24,6 +25,14 @@ func NewPostRepository(db *gorm.DB) PostRepository {
 
 func (r *postRepository) Create(post *models.Post) error {
 	return r.db.Create(post).Error
+}
+
+func (r *postRepository) FindAll() ([]models.Post, error) {
+	var posts []models.Post
+	if err := r.db.Preload("User").Order("created_at DESC").Find(&posts).Error; err != nil {
+		return nil, err
+	}
+	return posts, nil
 }
 
 func (r *postRepository) FindByID(id uint) (*models.Post, error) {
